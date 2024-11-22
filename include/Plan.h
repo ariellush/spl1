@@ -32,4 +32,5 @@ class Plan {
         vector<Facility*> underConstruction;
         const vector<FacilityType> &facilityOptions;
         int life_quality_score, economy_score, environment_score;
+        int constructionLimit;
 };
