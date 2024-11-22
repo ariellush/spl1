@@ -23,6 +23,11 @@ class Plan {
         void addFacility(Facility* facility);
         const string toString() const;
 
+        Plan(Plan& other);
+        Plan& operator=(const Plan &other);
+        ~Plan();
+
+
     private:
         int plan_id;
         Settlement &settlement;

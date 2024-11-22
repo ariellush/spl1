@@ -8,10 +8,10 @@ settlement(const_cast<Settlement&>(newSettlement))
 ,facilityOptions(newFacilityOptions),
 life_quality_score(0),
 economy_score(0),
-environment_score(0)
+environment_score(0),
+facilities(vector<Facility*>()),
+underConstruction(vector<Facility*>())
 {
-    facilities=vector<Facility*>();
-    underConstruction=vector<Facility*>();
     switch(newSettlement.getType()) // set construction limit according to the settlement type
     {
         case SettlementType::VILLAGE : constructionLimit = 1;
@@ -24,6 +24,30 @@ environment_score(0)
         break;
     }
 };
+
+//copy constructor
+//create an identicle (yet seperate) copy of other
+//essencialy the same plan up to that point, refering to the same settlement with the same
+//buliding under construction and constructed
+//allowes to change the copy of the plan without discarding to original
+Plan::Plan(Plan& other)
+:plan_id(other.plan_id)
+,settlement(other.settlement)
+,selectionPolicy(other.selectionPolicy)
+,facilityOptions(other.facilityOptions),
+life_quality_score(other.life_quality_score)
+,economy_score(other.economy_score)
+,environment_score(other.environment_score)
+,facilities(other.facilities)
+,underConstruction(other.underConstruction)
+,constructionLimit(other.constructionLimit)
+{};
+
+
+Plan::~Plan()
+{
+    
+}
 
 const int Plan::getEconomyScore() const{return economy_score;};
 const int Plan::getEnvironmentScore() const{return environment_score;};
