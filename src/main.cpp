@@ -1,6 +1,5 @@
-#include "/workspaces/project1/include/Simulation.h"
+#include "Simulation.h"
 #include <iostream>
-#include "/workspaces/project1/include/Settlement.h"
 
 using namespace std;
 
@@ -19,4 +18,4 @@ int main(int argc, char** argv){
     	backup = nullptr;
     }
     return 0;
-}
+}   
