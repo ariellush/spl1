@@ -43,10 +43,17 @@ life_quality_score(other.life_quality_score)
 ,constructionLimit(other.constructionLimit)
 {};
 
-
+//destructor is empty since all refrences arent exclusive to the plan
 Plan::~Plan()
 {
-    
+}
+
+Plan& Plan::operator=(const Plan &other)
+{
+    if (&other != this)
+    {
+        plan_id=other.plan_id;
+    }
 }
 
 const int Plan::getEconomyScore() const{return economy_score;};
