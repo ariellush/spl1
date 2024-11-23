@@ -78,6 +78,16 @@ void Plan::step()
         }
 
         //step 3
+        for(int i=underConstruction.size()-1;i>=0;i++)
+        {
+            underConstruction[i]->setStatus(underConstruction[i]->step());
+            if (underConstruction[i]->getStatus()==FacilityStatus::OPERATIONAL)
+            {
+                facilities.push_back(underConstruction[i]);
+                underConstruction.erase(underConstruction.begin()+i);
+            }
+
+        }
 
         //step 4
         if (underConstruction.size()==constructionLimit)
