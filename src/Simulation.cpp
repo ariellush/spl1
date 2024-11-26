@@ -77,20 +77,15 @@ planCounter(0)
                 if (policyStr=="nve")
                     policy = new NaiveSelection();
                 else if (policyStr=="bal")
-                    policy = new BalancedSelection();
+                    policy = new BalancedSelection(0, 0, 0);
                 else if (policyStr=="eco")
                     policy=new EconomySelection();
                 else if (policyStr=="env")
                     policy=new SustainabilitySelection();
                 
                 addPlan(*settlement,policy);
-                
             }
         }
     }
 
-
-
-
-#hiiiiiii
 }
