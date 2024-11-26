@@ -3,7 +3,7 @@
 
 Plan::Plan(const int planId, const Settlement &newSettlement, SelectionPolicy *newSelectionPolicy, const vector<FacilityType> &newFacilityOptions) 
 :plan_id(plan_id),
-settlement(const_cast<Settlement&>(newSettlement)) 
+settlement(newSettlement) 
 ,selectionPolicy(newSelectionPolicy)
 ,facilityOptions(newFacilityOptions),
 life_quality_score(0),
@@ -43,7 +43,7 @@ life_quality_score(other.life_quality_score)
 ,constructionLimit(other.constructionLimit)
 {};
 
-//destructor is empty since all refrences arent exclusive to the plan
+
 Plan::~Plan()
 {
 }

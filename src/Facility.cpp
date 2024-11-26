@@ -29,7 +29,7 @@ Facility :: Facility(const string &name, const string &settlementName, const Fac
         status = FacilityStatus :: UNDER_CONSTRUCTIONS;
     }
 
-Facility :: Facility(FacilityType &type, const string &settlementName)
+Facility :: Facility(const FacilityType &type, const string &settlementName)
     : FacilityType :: FacilityType(type), settlementName(settlementName), timeLeft(price){
         status = FacilityStatus :: UNDER_CONSTRUCTIONS;
     }
@@ -59,9 +59,9 @@ const string Facility :: toString() const {
 }
 
 FacilityStatus Facility :: step(){
+
+    timeLeft--;
     if(timeLeft == 0)
         status = FacilityStatus :: OPERATIONAL;
-    else
-        timeLeft--;
     return status;    
 }

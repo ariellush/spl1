@@ -6,6 +6,7 @@ Settlement::Settlement(const string &newName,SettlementType newType)
 ,type(newType)
 {};
 
+
 //name getter
 const string &Settlement::getName() const{return name;};
 
