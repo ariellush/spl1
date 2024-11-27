@@ -27,6 +27,9 @@ class Plan {
         Plan& operator=(const Plan &other);
         ~Plan();
 
+        Plan(Plan&& other);
+        Plan& operator=(Plan&& other);
+
 
     private:
         int plan_id;

@@ -45,15 +45,40 @@ life_quality_score(other.life_quality_score)
 
 
 Plan::~Plan()
-{
-}
+{}
 
+//essencialy only copies the selection policy 
+//since the settlement cannot be changed
 Plan& Plan::operator=(const Plan &other)
 {
     if (&other != this)
     {
-        plan_id=other.plan_id;
+        selectionPolicy=other.selectionPolicy;
     }
+}
+
+//Move constructor
+Plan::Plan(Plan&& other)
+:plan_id(other.plan_id)
+,settlement(other.settlement)
+,selectionPolicy(other.selectionPolicy)
+,facilityOptions(other.facilityOptions),
+life_quality_score(other.life_quality_score)
+,economy_score(other.economy_score)
+,environment_score(other.environment_score)
+,facilities(other.facilities)
+,underConstruction(other.underConstruction)
+,constructionLimit(other.constructionLimit)
+{
+    other.selectionPolicy=nullptr;
+}
+
+
+//Move assignment operator
+Plan& Plan::operator=(Plan&& other)
+{
+    selectionPolicy=other.selectionPolicy;
+    other.selectionPolicy=nullptr;
 }
 
 const int Plan::getEconomyScore() const{return economy_score;};
