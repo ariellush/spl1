@@ -10,7 +10,8 @@ life_quality_score(0),
 economy_score(0),
 environment_score(0),
 facilities(vector<Facility*>()),
-underConstruction(vector<Facility*>())
+underConstruction(vector<Facility*>()),
+status(PlanStatus::AVALIABLE)
 {
     switch(newSettlement.getType()) // set construction limit according to the settlement type
     {
@@ -41,6 +42,7 @@ life_quality_score(other.life_quality_score)
 ,facilities(other.facilities)
 ,underConstruction(other.underConstruction)
 ,constructionLimit(other.constructionLimit)
+,status(other.status)
 {};
 
 
@@ -69,6 +71,7 @@ life_quality_score(other.life_quality_score)
 ,facilities(other.facilities)
 ,underConstruction(other.underConstruction)
 ,constructionLimit(other.constructionLimit)
+,status(other.status)
 {
     other.selectionPolicy=nullptr;
 }
@@ -144,3 +147,13 @@ const string Plan::toString() const{return "Plan "+plan_id;}
 
 const vector<Facility*>& Plan::getFacilities() const{return facilities;};
 
+
+string Plan::getPlanStatusStr() const
+{
+    if (status==PlanStatus::AVALIABLE)
+        return "AVALIABLE";
+    else if (status==PlanStatus::BUSY)
+        return "BUSY";
+    else
+        return "UNDEFINED";//should never happen
+}
