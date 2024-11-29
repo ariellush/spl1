@@ -1,8 +1,8 @@
 # Please implement your Makefile rules and targets below.
-main: bin/main.o bin/Facility.o bin/SelectionPolicy.o
+main: bin/main.o bin/Facility.o bin/SelectionPolicy.o bin/Simulation.o bin/Plan.o
 	@echo 'Building target: main'
 	@echo 'Invoking: C++ Linker'
-	g++ -o bin/main bin/main.o bin/Facility.o bin/SelectionPolicy.o
+	g++ -o bin/main bin/main.o bin/Facility.o bin/SelectionPolicy.o bin/Simulation.o bin/Plan.o
 	@echo 'Finished building target: main'
 	@echo ' '	
 
@@ -14,6 +14,12 @@ bin/SelectionPolicy.o : src/SelectionPolicy.cpp include/SelectionPolicy.h
 
 bin/Facility.o : src/Facility.cpp include/Facility.h
 	g++ -g -Wall -Weffc++ -std=c++11 -c -Iinclude -o bin/Facility.o src/Facility.cpp
+
+bin/Simulation.o: src/Simulation.cpp include/Simulation.h	
+	g++ -g -Wall -Weffc++ -std=c++11 -c -Iinclude -o bin/Simulation.o src/Simulation.cpp
+
+bin/Plan.o : src/Plan.cpp include/Plan.h	
+	g++ -g -Wall -Weffc++ -std=c++11 -c -Iinclude -o bin/Plan.o src/Plan.cpp	
 
 clean:
 	rm -f bin/*	
