@@ -4,6 +4,7 @@
 #include "Simulation.h"
 enum class SettlementType;
 enum class FacilityCategory;
+class Simulation;
 
 enum class ActionStatus{
     COMPLETED, ERROR

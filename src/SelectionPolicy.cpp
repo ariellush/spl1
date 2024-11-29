@@ -12,7 +12,7 @@ const FacilityType& NaiveSelection :: selectFacility(const vector<FacilityType>&
 }
 
 const string NaiveSelection :: toString() const{
-    return "selection policy: nev";
+    return "nev";
 }
 
 NaiveSelection * NaiveSelection :: clone() const{
@@ -47,7 +47,7 @@ const FacilityType& BalancedSelection :: selectFacility(const vector<FacilityTyp
 }    
 
 const string BalancedSelection :: toString() const{
-    return "selection policy: bal";
+    return "bal";
 }
 
 BalancedSelection * BalancedSelection :: clone() const{
@@ -72,7 +72,7 @@ const FacilityType& EconomySelection :: selectFacility(const vector<FacilityType
 }
 
 const string EconomySelection :: toString() const{
-    return "selection policy: eco";
+    return "eco";
 }
 
 EconomySelection * EconomySelection :: clone() const{
@@ -97,7 +97,7 @@ const FacilityType& SustainabilitySelection :: selectFacility(const vector<Facil
 }
 
 const string SustainabilitySelection :: toString() const{
-    return "selection policy: env";
+    return "env";
 }
 
 SustainabilitySelection * SustainabilitySelection :: clone() const{

@@ -5,6 +5,7 @@
 #include "Plan.h"
 #include "Settlement.h"
 #include "Auxiliary.h"
+#include "Action.h"
 using std::string;
 using std::vector;
 
