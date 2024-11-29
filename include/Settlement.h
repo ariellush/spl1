@@ -5,7 +5,6 @@ using std::string;
 using std::vector;
 
 class Facility;
-
 enum class SettlementType {
     VILLAGE,
     CITY,
@@ -18,6 +17,7 @@ class Settlement {
         const string &getName() const;
         SettlementType getType() const;
         const string toString() const;
+        Settlement& operator=(const Settlement &other);
 
         private:
             const string name;

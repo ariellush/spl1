@@ -246,7 +246,7 @@ void Simulation::start(){
 }
 
 void Simulation :: addPlan(const Settlement &settlement, SelectionPolicy *selectionPolicy){
-    plans.emplace_back(planCounter, settlement, selectionPolicy, vector<FacilityType>());
+    plans.push_back(Plan(planCounter, settlement, selectionPolicy, vector<FacilityType>()));
     planCounter++;
 }
 
@@ -302,4 +302,84 @@ void Simulation :: close(){
 
 void Simulation :: open(){
     isRunning = true;
+}
+
+vector<BaseAction*>& Simulation:: getActionsLog(){
+    return actionsLog;
+}
+
+Simulation:: Simulation(Simulation& other):isRunning(other.isRunning),planCounter(other.planCounter){
+    actionsLog = vector<BaseAction*>();
+    for(BaseAction *action: other.actionsLog){
+        actionsLog.push_back(action->clone());
+    }
+    plans = vector<Plan>();
+    for(Plan plan: other.plans){
+        plans.push_back(plan);
+    }
+    settlements = vector<Settlement *>();
+    for(Settlement *set: other.settlements){
+        Settlement *newVal = nullptr;
+        *newVal = *set;
+        settlements.push_back(newVal);
+    }
+    facilitiesOptions = vector<FacilityType>();
+    for(FacilityType type: other.facilitiesOptions){
+        facilitiesOptions.push_back(type);
+    }
+}
+
+Simulation& Simulation :: operator=(const Simulation &other){
+    Simulation::~Simulation();
+    isRunning = other.isRunning;
+    planCounter = other.planCounter;
+    actionsLog = vector<BaseAction*>();
+    for(BaseAction *action: other.actionsLog){
+        actionsLog.push_back(action->clone());
+    }
+    plans = vector<Plan>();
+    for(const Plan &plan: other.plans){
+        plans.push_back(plan);
+    }
+    settlements = vector<Settlement *>();
+    for(Settlement *set: other.settlements){
+        Settlement *newVal = nullptr;
+        *newVal = *set;
+        settlements.push_back(newVal);
+    }
+    facilitiesOptions = vector<FacilityType>();
+    for(FacilityType type: other.facilitiesOptions){
+        facilitiesOptions.push_back(type);
+    }
+}
+Simulation ::~Simulation(){
+    for(BaseAction *action: actionsLog){
+        delete action;
+    }
+    for(Settlement *set: settlements){
+        delete set;
+    }
+}
+Simulation :: Simulation(Simulation&& other):isRunning(other.isRunning),planCounter(other.planCounter){
+    actionsLog = other.actionsLog;
+    plans = other.plans;    
+    settlements = other.settlements;
+    facilitiesOptions = other.facilitiesOptions;
+    other.facilitiesOptions = vector<FacilityType>();
+    other.settlements = vector<Settlement *>();
+    other.plans = vector<Plan>();
+    other.actionsLog = vector<BaseAction *>();
+}
+Simulation& Simulation :: operator=(Simulation&& other){
+    Simulation::~Simulation();
+    isRunning = other.isRunning;
+    planCounter = other.planCounter;
+    actionsLog = other.actionsLog;
+    plans = other.plans;    
+    settlements = other.settlements;
+    facilitiesOptions = other.facilitiesOptions;
+    other.facilitiesOptions = vector<FacilityType>();
+    other.settlements = vector<Settlement *>();
+    other.plans = vector<Plan>();
+    other.actionsLog = vector<BaseAction *>();    
 }

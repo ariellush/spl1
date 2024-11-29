@@ -26,6 +26,12 @@ class Simulation {
         void step();
         void close();
         void open();
+        Simulation(Simulation& other);
+        Simulation& operator=(const Simulation &other);
+        ~Simulation();
+        Simulation(Simulation&& other);
+        Simulation& operator=(Simulation&& other);
+        vector<BaseAction*>& getActionsLog();
 
     private:
         bool isRunning;

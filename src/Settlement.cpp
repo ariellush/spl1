@@ -31,3 +31,4 @@ const string Settlement::toString() const
 
     return "Settlement - "+name+" | type: "+typeStr;
 };
+Settlement& Settlement :: operator=(const Settlement &other){};
