@@ -58,24 +58,31 @@ AddPlan::AddPlan(const string &newSettlementName, const string &newSelectionPoli
 {}
 void AddPlan::act(Simulation& simulation)
 {
-    Settlement settlement = simulation.getSettlement(settlementName);
-    //error
-    SelectionPolicy* policy;
-    if (selectionPolicy=="nve")
-        policy = new NaiveSelection();
-    else if (selectionPolicy=="bal")
-        policy = new BalancedSelection(0,0,0); //change that
-    else if (selectionPolicy=="eco")
-        policy = new EconomySelection();
-    else if (selectionPolicy=="env")
-        policy = new SustainabilitySelection();
-    else
+    if (!simulation.isSettlementExists(settlementName))
         error("Cannot create this plan");
-    if (getErrorMsg()!="Cannot create this plan")
-    {
-        simulation.addPlan(settlement,policy);
-        complete();
-    }
+    else{
+        Settlement settlement = simulation.getSettlement(settlementName);
+        bool policyExist = true;
+        SelectionPolicy* policy;
+        if (selectionPolicy=="nve")
+            policy = new NaiveSelection();
+        else if (selectionPolicy=="bal")
+            policy = new BalancedSelection(0,0,0);
+        else if (selectionPolicy=="eco")
+            policy = new EconomySelection();
+        else if (selectionPolicy=="env")
+            policy = new SustainabilitySelection();
+        else
+        {
+            error("Cannot create this plan");
+            policyExist=false;
+        }
+        if (policyExist)
+            {
+            simulation.addPlan(settlement,policy);
+            complete();
+            }   
+        }
 
 }
 const string AddPlan::toString() const
@@ -225,7 +232,7 @@ void ChangePlanPolicy::act(Simulation& simulation)
     if (newPolicy=="nve")
         policy = new NaiveSelection();
     else if (newPolicy=="bal")
-        policy = new BalancedSelection(0,0,0); //change that
+        policy = new BalancedSelection(plan.getlifeQualityScore(),plan.getEconomyScore(),plan.getEnvironmentScore());
     else if (newPolicy=="eco")
         policy = new EconomySelection();
     else if (newPolicy=="env")
