@@ -19,15 +19,11 @@ NaiveSelection * NaiveSelection :: clone() const{
     return new NaiveSelection();
 }
 
-NaiveSelection::~NaiveSelection()
-{
-}
-
 BalancedSelection :: BalancedSelection(int LifeQualityScore, int EconomyScore, int EnvironmentScore) : LifeQualityScore(LifeQualityScore),
 EconomyScore(EconomyScore), EnvironmentScore(EnvironmentScore){};
 
 int BalancedSelection :: getMaxDistance(FacilityType & facility){
-    return std::max(facility.getEconomyScore() + EconomyScore, facility.getEnvironmentScore() + EnvironmentScore, facility.getLifeQualityScore() + LifeQualityScore);
+    return std::max(std::max(facility.getEconomyScore() + EconomyScore, facility.getEnvironmentScore() + EnvironmentScore), facility.getLifeQualityScore() + LifeQualityScore);
 }
 
 const FacilityType& BalancedSelection :: selectFacility(const vector<FacilityType>& facilitiesOptions){
@@ -58,10 +54,6 @@ BalancedSelection * BalancedSelection :: clone() const{
     return new BalancedSelection(LifeQualityScore, EconomyScore, EnvironmentScore);
 }
 
-BalancedSelection::~BalancedSelection()
-{
-}
-
 EconomySelection :: EconomySelection() : lastSelectedIndex(-1){}
 const FacilityType& EconomySelection :: selectFacility(const vector<FacilityType>& facilitiesOptions){
     int currIndex = lastSelectedIndex + 1;
@@ -87,10 +79,6 @@ EconomySelection * EconomySelection :: clone() const{
     return new EconomySelection();
 }
 
-EconomySelection::~EconomySelection()
-{
-}
-
 SustainabilitySelection :: SustainabilitySelection() : lastSelectedIndex(-1){}
 const FacilityType& SustainabilitySelection :: selectFacility(const vector<FacilityType>& facilitiesOptions){
     int currIndex = lastSelectedIndex + 1;
@@ -114,8 +102,4 @@ const string SustainabilitySelection :: toString() const{
 
 SustainabilitySelection * SustainabilitySelection :: clone() const{
     return new SustainabilitySelection();
-}
-
-SustainabilitySelection::~SustainabilitySelection()
-{
 }

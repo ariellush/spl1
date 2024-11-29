@@ -4,6 +4,7 @@
 #include "Facility.h"
 #include "Plan.h"
 #include "Settlement.h"
+#include "Auxiliary.h"
 using std::string;
 using std::vector;
 
