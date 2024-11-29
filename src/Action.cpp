@@ -282,6 +282,14 @@ const string PrintActionsLog::toString() const
     return "log "+statusStr;
 }
 
+Close::Close()
+{}
+void Close::act(Simulation& simulation)
+{
+    simulation.close();
+    int i=0;
+}
+
 
 
 BackupSimulation::BackupSimulation()
