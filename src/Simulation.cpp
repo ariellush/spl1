@@ -315,7 +315,7 @@ Simulation:: Simulation(Simulation& other):isRunning(other.isRunning),planCounte
     }
     plans = vector<Plan>();
     for(Plan plan: other.plans){
-        plans.push_back(plan);
+        plans.push_back(Plan(plan));
     }
     settlements = vector<Settlement *>();
     for(Settlement *set: other.settlements){
@@ -339,7 +339,7 @@ Simulation& Simulation :: operator=(const Simulation &other){
     }
     plans = vector<Plan>();
     for(const Plan &plan: other.plans){
-        plans.push_back(plan);
+        plans.push_back(Plan(plan));
     }
     settlements = vector<Settlement *>();
     for(Settlement *set: other.settlements){

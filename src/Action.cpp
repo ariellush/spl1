@@ -321,8 +321,8 @@ void RestoreSimulation::act(Simulation& simulation)
     if (backup==nullptr)
         error("No backup available");
     else{
-    simulation = backup;//rule of 5
-    complete();
+        simulation = *backup;//rule of 5
+        complete();
     }
 }
 RestoreSimulation* RestoreSimulation::clone() const 

@@ -45,6 +45,20 @@ life_quality_score(other.life_quality_score)
 ,status(other.status)
 {};
 
+//added for ref in simulation
+Plan:: Plan(const Plan& other)
+:plan_id(other.plan_id)
+,settlement(other.settlement)
+,selectionPolicy(other.selectionPolicy)
+,facilityOptions(other.facilityOptions),
+life_quality_score(other.life_quality_score)
+,economy_score(other.economy_score)
+,environment_score(other.environment_score)
+,facilities(other.facilities)
+,underConstruction(other.underConstruction)
+,constructionLimit(other.constructionLimit)
+,status(other.status)
+{};
 
 Plan::~Plan()
 {}

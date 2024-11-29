@@ -24,6 +24,7 @@ class Plan {
         const string toString() const;
 
         Plan(Plan& other);
+        Plan(const Plan& other);
         Plan& operator=(const Plan &other);
         ~Plan();
 
