@@ -351,6 +351,7 @@ Simulation& Simulation :: operator=(const Simulation &other){
     for(FacilityType type: other.facilitiesOptions){
         facilitiesOptions.push_back(type);
     }
+    return *this;
 }
 Simulation ::~Simulation(){
     for(BaseAction *action: actionsLog){
@@ -382,4 +383,5 @@ Simulation& Simulation :: operator=(Simulation&& other){
     other.settlements = vector<Settlement *>();
     other.plans = vector<Plan>();
     other.actionsLog = vector<BaseAction *>();    
+    return *this;
 }
