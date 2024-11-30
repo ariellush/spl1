@@ -32,6 +32,7 @@ class Simulation {
         Simulation(Simulation&& other);
         Simulation& operator=(Simulation&& other);
         vector<BaseAction*>& getActionsLog();
+        bool isPlanExist(int planId) const;
 
     private:
         bool isRunning;

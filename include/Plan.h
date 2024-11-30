@@ -31,6 +31,7 @@ class Plan {
         Plan(Plan&& other);
         Plan& operator=(Plan&& other);
         string getPlanStatusStr() const;
+        SelectionPolicy* getSelectionPolicy() const;
 
 
     private:

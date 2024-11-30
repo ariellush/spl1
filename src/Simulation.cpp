@@ -308,6 +308,13 @@ vector<BaseAction*>& Simulation:: getActionsLog(){
     return actionsLog;
 }
 
+bool Simulation::isPlanExist(int planId) const
+{
+        if(planId < plans.size() && planId >= 0)
+            return true;
+        return false;
+}
+
 Simulation:: Simulation(Simulation& other):isRunning(other.isRunning),planCounter(other.planCounter){
     actionsLog = vector<BaseAction*>();
     for(BaseAction *action: other.actionsLog){
@@ -330,7 +337,7 @@ Simulation:: Simulation(Simulation& other):isRunning(other.isRunning),planCounte
 }
 
 Simulation& Simulation :: operator=(const Simulation &other){
-    Simulation::~Simulation();
+    this->~Simulation();
     isRunning = other.isRunning;
     planCounter = other.planCounter;
     actionsLog = vector<BaseAction*>();
@@ -372,7 +379,7 @@ Simulation :: Simulation(Simulation&& other):isRunning(other.isRunning),planCoun
     other.actionsLog = vector<BaseAction *>();
 }
 Simulation& Simulation :: operator=(Simulation&& other){
-    Simulation::~Simulation();
+    this->~Simulation();
     isRunning = other.isRunning;
     planCounter = other.planCounter;
     actionsLog = other.actionsLog;

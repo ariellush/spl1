@@ -171,3 +171,8 @@ string Plan::getPlanStatusStr() const
     else
         return "UNDEFINED";//should never happen
 }
+
+SelectionPolicy* Plan::getSelectionPolicy() const
+{
+    return selectionPolicy;
+}

@@ -224,9 +224,9 @@ ChangePlanPolicy::ChangePlanPolicy(const int newPlanId, const string &newNewPoli
 {}
 void ChangePlanPolicy::act(Simulation& simulation)
 {
-   /* if (simulation.isPlanExist())
+   if (simulation.isPlanExist(planId))
         error("Cannot change selection policy");
-    else{*/
+    else{
     Plan plan = simulation.getPlan(planId);
     SelectionPolicy* policy;
     if (newPolicy=="nve")
@@ -237,13 +237,13 @@ void ChangePlanPolicy::act(Simulation& simulation)
         policy = new EconomySelection();
     else if (newPolicy=="env")
         policy = new SustainabilitySelection();
-    /*if (typeid(simulation.getPolicy())==typeid(policy))
+    if (typeid(simulation.getPlan(planId).getSelectionPolicy())==typeid(policy))
         error("Cannot change selection policy");
-    else{*/
+    else{
         plan.setSelectionPolicy(policy);
         complete();
-    //  }
-    //}
+      }
+    }
 }
 ChangePlanPolicy* ChangePlanPolicy::clone() const
 {
@@ -260,7 +260,7 @@ PrintActionsLog::PrintActionsLog()
 {}
 void PrintActionsLog::act(Simulation& simulation)
 {
-    vector<BaseAction*>& actionsLog = simulation.getActionsLog(); //add that
+    vector<BaseAction*>& actionsLog = simulation.getActionsLog();
     for (int i=0;i<actionsLog.size();i++)
     {
         BaseAction* currentAction = actionsLog.at(i);
@@ -288,6 +288,11 @@ void Close::act(Simulation& simulation)
 {
     simulation.close();
     int i=0;
+    while(simulation.isPlanExist(i))
+    {
+        PrintPlanStatus* pps = new PrintPlanStatus(i);
+        pps->act(simulation);
+    }
 }
 
 
@@ -321,7 +326,7 @@ void RestoreSimulation::act(Simulation& simulation)
     if (backup==nullptr)
         error("No backup available");
     else{
-        simulation = *backup;//rule of 5
+        simulation = *backup;
         complete();
     }
 }
