@@ -189,20 +189,27 @@ void PrintPlanStatus::act(Simulation &simulation)
 {
 
     Plan& plan = simulation.getPlan(planId);
+
     if (&plan==nullptr)
+    {
      error("Plan doesn't exist");
+     std::cout<<"i dumb lmao"<<std::endl;
+    }
+    else{
     std::cout<<"Plan id: "<<planId << "settlementName"<<std::endl;//get name
     std::cout<<"planStatus: "<<plan.getPlanStatusStr()<<std::endl;
     std::cout<<"LifeQualityScore: "<<plan.getlifeQualityScore()<<std::endl;
     std::cout<<"EconomyScore: "<<plan.getEconomyScore()<<std::endl;
     std::cout<<"EnvironmentScore: "<<plan.getEnvironmentScore()<<std::endl;
     const vector<Facility*> facilities = plan.getFacilities();
-    for (int i=0;i<facilities.size();i++)
-    {
-        std::cout<<"facilityName: "<<facilities.at(i)->getName()<<" facilityStatus: "<</*facilities.at(i)->getStatus()<<*/std::endl;
+        for (int i=0;i<facilities.size();i++)
+        {
+            std::cout<<"facilityName: "<<facilities.at(i)->getName()<<" facilityStatus: "<</*facilities.at(i)->getStatus()<<*/std::endl;
+        }
+    complete();
     }
 
-    complete();
+    
 }
 PrintPlanStatus* PrintPlanStatus::clone() const
 {
