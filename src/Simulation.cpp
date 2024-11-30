@@ -345,8 +345,8 @@ Simulation& Simulation :: operator=(const Simulation &other){
         actionsLog.push_back(action->clone());
     }
     plans = vector<Plan>();
-    for(const Plan &plan: other.plans){
-        plans.push_back(std::move(plan));
+    for(int i = 0; i < other.plans.size(); i++){
+        plans.push_back(other.plans.at(i));
     }
     settlements = vector<Settlement *>();
     for(Settlement *set: other.settlements){
@@ -368,9 +368,11 @@ Simulation ::~Simulation(){
         delete set;
     }
 }
-Simulation :: Simulation(Simulation&& other):isRunning(other.isRunning),planCounter(other.planCounter){
+Simulation :: Simulation(Simulation&& other):isRunning(other.isRunning),planCounter(other.planCounter),plans(vector<Plan>()){
     actionsLog = other.actionsLog;
-    plans = other.plans;    
+    for(int i = 0; i < other.plans.size(); i++){
+        plans.push_back(other.plans.at(i));
+    }  
     settlements = other.settlements;
     facilitiesOptions = other.facilitiesOptions;
     other.facilitiesOptions = vector<FacilityType>();
@@ -383,7 +385,10 @@ Simulation& Simulation :: operator=(Simulation&& other){
     isRunning = other.isRunning;
     planCounter = other.planCounter;
     actionsLog = other.actionsLog;
-    plans = other.plans;    
+    plans = vector<Plan>();
+    for(int i = 0; i < other.plans.size(); i++){
+        plans.push_back(other.plans.at(i));
+    }    
     settlements = other.settlements;
     facilitiesOptions = other.facilitiesOptions;
     other.facilitiesOptions = vector<FacilityType>();
