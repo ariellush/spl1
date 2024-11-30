@@ -175,3 +175,7 @@ SelectionPolicy* Plan::getSelectionPolicy() const
 {
     return selectionPolicy;
 }
+
+int Plan:: getID(){
+    return plan_id;
+}

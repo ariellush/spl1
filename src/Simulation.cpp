@@ -285,8 +285,11 @@ Settlement& Simulation :: getSettlement(const string &settlementName){
 
 Plan & Simulation :: getPlan(const int planID){
     Plan *toReturn = nullptr;
-    if(planID < plans.size() && planID >= 0)
-        *toReturn = plans.at(planID);
+    for(int i = 0; i < plans.size(); i++){
+        if(plans.at(i).getID() == planID){
+            *toReturn = plans.at(i);
+        }
+    }
     return *toReturn;
 }
 
