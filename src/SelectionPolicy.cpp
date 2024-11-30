@@ -16,7 +16,9 @@ const string NaiveSelection :: toString() const{
 }
 
 NaiveSelection * NaiveSelection :: clone() const{
-    return new NaiveSelection();
+    NaiveSelection * toReturn = new NaiveSelection();
+    (*toReturn).lastSelectedIndex = lastSelectedIndex;
+    return toReturn;
 }
 
 BalancedSelection :: BalancedSelection(int LifeQualityScore, int EconomyScore, int EnvironmentScore) : LifeQualityScore(LifeQualityScore),
@@ -76,7 +78,9 @@ const string EconomySelection :: toString() const{
 }
 
 EconomySelection * EconomySelection :: clone() const{
-    return new EconomySelection();
+    EconomySelection * toReturn = new EconomySelection();
+    (*toReturn).lastSelectedIndex = lastSelectedIndex;
+    return toReturn;
 }
 
 SustainabilitySelection :: SustainabilitySelection() : lastSelectedIndex(-1){}
@@ -101,5 +105,7 @@ const string SustainabilitySelection :: toString() const{
 }
 
 SustainabilitySelection * SustainabilitySelection :: clone() const{
-    return new SustainabilitySelection();
+    SustainabilitySelection * toReturn = new SustainabilitySelection();
+    (*toReturn).lastSelectedIndex = lastSelectedIndex;
+    return toReturn;
 }
