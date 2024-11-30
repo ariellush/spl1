@@ -33,3 +33,6 @@ bin/Auxiliary.o : src/Auxiliary.cpp include/Auxiliary.h
 clean:
 	rm -f bin/*	
 # Customize this file to define how to build your project.
+
+run:
+	./bin/main "C:\Users\ronsh\OneDrive\Desktop\בן גוריון\שנה ב תשפה\סמסטר ג\תכנות מערכות\Projects\project1\bin\main"

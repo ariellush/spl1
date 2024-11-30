@@ -2,9 +2,11 @@
 #include "Plan.h"
 #include <iostream>
 
-extern Simulation* backup=nullptr;
+extern Simulation* backup;
 
 
+BaseAction::BaseAction()
+{}
 ActionStatus BaseAction::getStatus() const
 {
     return status;
@@ -256,6 +258,7 @@ const string ChangePlanPolicy::toString() const
 
 
 
+
 PrintActionsLog::PrintActionsLog()
 {}
 void PrintActionsLog::act(Simulation& simulation)
@@ -293,8 +296,21 @@ void Close::act(Simulation& simulation)
         PrintPlanStatus* pps = new PrintPlanStatus(i);
         pps->act(simulation);
     }
+    complete();
 }
-
+Close* Close::clone() const
+{
+    return new Close(*this);
+}
+const string Close::toString() const
+{
+    string statusStr = "";
+    if (getStatus() == ActionStatus::COMPLETED)
+        statusStr="COMPLETED";
+    else if (getStatus()==ActionStatus::ERROR)
+        statusStr=="ERROR";
+    return "close "+statusStr;
+}
 
 
 BackupSimulation::BackupSimulation()
