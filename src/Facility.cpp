@@ -24,10 +24,6 @@ FacilityCategory FacilityType :: getCategory() const {
     return category;
 }
 
-FacilityType& FacilityType::operator=(const FacilityType &other)
-{
-}
-
 Facility :: Facility(const string &name, const string &settlementName, const FacilityCategory category, const int price, const int lifeQuality_score, const int economy_score, const int environment_score)
     : FacilityType :: FacilityType(name, category, price, lifeQuality_score, economy_score, environment_score), settlementName(settlementName), timeLeft(price){
         status = FacilityStatus :: UNDER_CONSTRUCTIONS;
@@ -69,3 +65,5 @@ FacilityStatus Facility :: step(){
         status = FacilityStatus :: OPERATIONAL;
     return status;    
 }
+
+FacilityType &FacilityType:: operator=(const FacilityType &other){}

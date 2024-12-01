@@ -25,7 +25,7 @@ class FacilityType {
         int getEnvironmentScore() const;
         int getEconomyScore() const;
         FacilityCategory getCategory() const;
-        FacilityType& operator=(const FacilityType &other);
+        FacilityType &operator=(const FacilityType &other); 
 
     protected:
         const string name;

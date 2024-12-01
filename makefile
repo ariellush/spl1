@@ -35,4 +35,4 @@ clean:
 # Customize this file to define how to build your project.
 
 run:
-	./bin/main "C:\Users\ronsh\OneDrive\Desktop\בן גוריון\שנה ב תשפה\סמסטר ג\תכנות מערכות\Projects\project1\bin\main"
+	./bin/main /wrokspaces/spl1/spl1/confiig_file

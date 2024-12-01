@@ -193,7 +193,7 @@ void PrintPlanStatus::act(Simulation &simulation)
     if (&plan==nullptr)
     {
      error("Plan doesn't exist");
-     std::cout<<"i dumb lmao"<<std::endl;
+     std::cout<<getErrorMsg()<<std::endl;
     }
     else{
     std::cout<<"Plan id: "<<planId << "settlementName"<<std::endl;//get name
@@ -205,7 +205,13 @@ void PrintPlanStatus::act(Simulation &simulation)
         for (int i=0;i<facilities.size();i++)
         {
             std::cout<<"facilityName: "<<facilities.at(i)->getName()<<" facilityStatus: "<</*facilities.at(i)->getStatus()<<*/std::endl;
+        }    
+    const vector<Facility*> underConst = plan.getUnderConstruction();
+        for (int i=0;i<underConst.size();i++)
+        {
+            std::cout<<"facilityName: "<<underConst.at(i)->getName()<<" \nfacilityStatus: "<</*facilities.at(i)->getStatus()<<*/std::endl;
         }
+
     complete();
     }
 
@@ -349,7 +355,7 @@ void RestoreSimulation::act(Simulation& simulation)
     if (backup==nullptr)
         error("No backup available");
     else{
-        simulation = *backup;
+        simulation = Simulation(*backup);
         complete();
     }
 }

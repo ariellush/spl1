@@ -2,7 +2,7 @@
 #include <iostream>
 
 Plan::Plan(const int planId, const Settlement &newSettlement, SelectionPolicy *newSelectionPolicy, const vector<FacilityType> &newFacilityOptions) 
-:plan_id(plan_id),
+:plan_id(planId),
 settlement(newSettlement) 
 ,selectionPolicy(newSelectionPolicy)
 ,facilityOptions(newFacilityOptions),
@@ -111,7 +111,7 @@ void Plan::step()
     if(status==PlanStatus::AVALIABLE)
     {
         //step 2
-        while (constructionLimit<underConstruction.size())
+        while (constructionLimit>underConstruction.size())
         {
             FacilityType selectedType = selectionPolicy->selectFacility(facilityOptions);
             Facility* newFacility = new Facility(selectedType, settlement.getName());
@@ -119,7 +119,7 @@ void Plan::step()
         }
 
         //step 3
-        for(int i=underConstruction.size()-1;i>=0;i++)
+        for(int i=underConstruction.size()-1;i>=0;i--)
         {
             underConstruction[i]->setStatus(underConstruction[i]->step());
             if (underConstruction[i]->getStatus()==FacilityStatus::OPERATIONAL)
@@ -159,6 +159,7 @@ void Plan::addFacility(Facility* newFacility)
 const string Plan::toString() const{return "Plan "+plan_id;}
 
 const vector<Facility*>& Plan::getFacilities() const{return facilities;};
+const vector<Facility *>& Plan :: getUnderConstruction() const{return underConstruction;};
 
 
 string Plan::getPlanStatusStr() const

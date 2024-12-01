@@ -123,16 +123,20 @@ void Simulation::start(){
                         string name = args.at(1);
                         int type = std:: stoi(args.at(2));
                         SettlementType settlementType;
-                        bool error = true;
+                        bool error = false;
                         switch (type){
                             case 0:
                                 settlementType = SettlementType:: VILLAGE;
+                                break;
                             case 1:
                                 settlementType = SettlementType:: CITY;
+                                break;
                             case 2:
-                                settlementType = SettlementType:: METROPOLIS;                   
+                                settlementType = SettlementType:: METROPOLIS;     
+                                break;              
                             default:
                                 error = true;
+                                break;
                         }
                         if(error){
                             std::cout<<illeaglComm<<std::endl;        
@@ -158,12 +162,16 @@ void Simulation::start(){
                         switch(categoryNum){
                             case 0:
                                 category = FacilityCategory:: LIFE_QUALITY;
+                                break;
                             case 1:
                                 category = FacilityCategory:: ECONOMY;
+                                break;
                             case 2:
                                 category = FacilityCategory:: ENVIRONMENT;
+                                break;
                             default:
-                                error = true;            
+                                error = true;      
+                                break;      
                         }
                         if(error){
                             std:: cout<<illeaglComm<<std::endl;
@@ -246,7 +254,7 @@ void Simulation::start(){
 }
 
 void Simulation :: addPlan(const Settlement &settlement, SelectionPolicy *selectionPolicy){
-    plans.push_back(Plan(planCounter, settlement, selectionPolicy, vector<FacilityType>()));
+    plans.push_back(Plan(planCounter, settlement, selectionPolicy, facilitiesOptions));
     planCounter++;
 }
 
@@ -261,7 +269,7 @@ bool Simulation :: addSettlement(Settlement *settlement){
 
 bool Simulation :: addFacility(FacilityType facility){
     facilitiesOptions.push_back(facility);
-    return true;    
+    return true;
 }
 
 bool Simulation :: isSettlementExists(const string &settlementName){
@@ -284,18 +292,20 @@ Settlement& Simulation :: getSettlement(const string &settlementName){
 }
 
 Plan & Simulation :: getPlan(const int planID){
-    Plan *toReturn = nullptr;
-    for(int i = 0; i < plans.size(); i++){
+    Plan *toReturn=nullptr;
+    bool found = false;
+    for(int i = 0; i < plans.size() & !found; i++){
         if(plans.at(i).getID() == planID){
-            *toReturn = plans.at(i);
+            found = true;
+            toReturn = &plans.at(i);
         }
     }
     return *toReturn;
 }
 
 void Simulation :: step() {
-    for(Plan plan : plans){
-        plan.step();
+    for(int i = 0; i < plans.size(); i++){
+        plans.at(i).step();
     }
 }
 
@@ -329,8 +339,7 @@ Simulation:: Simulation(Simulation& other):isRunning(other.isRunning),planCounte
     }
     settlements = vector<Settlement *>();
     for(Settlement *set: other.settlements){
-        Settlement *newVal = nullptr;
-        *newVal = *set;
+        Settlement *newVal = set;
         settlements.push_back(newVal);
     }
     facilitiesOptions = vector<FacilityType>();
@@ -340,7 +349,7 @@ Simulation:: Simulation(Simulation& other):isRunning(other.isRunning),planCounte
 }
 
 Simulation& Simulation :: operator=(const Simulation &other){
-    this->~Simulation();
+    //this->~Simulation();
     isRunning = other.isRunning;
     planCounter = other.planCounter;
     actionsLog = vector<BaseAction*>();
@@ -384,7 +393,7 @@ Simulation :: Simulation(Simulation&& other):isRunning(other.isRunning),planCoun
     other.actionsLog = vector<BaseAction *>();
 }
 Simulation& Simulation :: operator=(Simulation&& other){
-    this->~Simulation();
+    //this->~Simulation();
     isRunning = other.isRunning;
     planCounter = other.planCounter;
     actionsLog = other.actionsLog;

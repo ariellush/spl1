@@ -33,6 +33,7 @@ class Plan {
         Plan& operator=(Plan&& other);
         string getPlanStatusStr() const;
         SelectionPolicy* getSelectionPolicy() const;
+        const vector<Facility *>& getUnderConstruction() const;
 
 
     private:

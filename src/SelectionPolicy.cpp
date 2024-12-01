@@ -5,7 +5,7 @@ const FacilityType& NaiveSelection :: selectFacility(const vector<FacilityType>&
     int currIndex = lastSelectedIndex + 1;
     FacilityType *toReturn = nullptr;
     if(facilitiesOptions.size() > currIndex){
-        *toReturn = facilitiesOptions.at(currIndex);
+        toReturn = new FacilityType(std::move(facilitiesOptions.at(currIndex)));
         lastSelectedIndex = currIndex;
     }
     return *toReturn;
@@ -25,27 +25,29 @@ BalancedSelection :: BalancedSelection(int LifeQualityScore, int EconomyScore, i
 EconomyScore(EconomyScore), EnvironmentScore(EnvironmentScore){};
 
 int BalancedSelection :: getMaxDistance(FacilityType & facility){
-    return std::max(std::max(facility.getEconomyScore() + EconomyScore, facility.getEnvironmentScore() + EnvironmentScore), facility.getLifeQualityScore() + LifeQualityScore);
+    int maxDis = std::max(std::max(facility.getEconomyScore() + EconomyScore, facility.getEnvironmentScore() + EnvironmentScore), facility.getLifeQualityScore() + LifeQualityScore);
+    int minDis = std::min(std::min(facility.getEconomyScore() + EconomyScore, facility.getEnvironmentScore() + EnvironmentScore), facility.getLifeQualityScore() + LifeQualityScore); 
+    return maxDis - minDis;
 }
 
 const FacilityType& BalancedSelection :: selectFacility(const vector<FacilityType>& facilitiesOptions){
-    FacilityType *minChoice = nullptr;
+    FacilityType *toReturn = nullptr;
     if(facilitiesOptions.size() > 0){
-        *minChoice = facilitiesOptions.at(0);
-        int maxDistanceInmin = getMaxDistance(*minChoice);
+        toReturn = new FacilityType(std::move(facilitiesOptions.at(0))); 
+        int maxDistanceInmin = getMaxDistance(*toReturn);
         for(FacilityType currFacility : facilitiesOptions){
             int currDistance = getMaxDistance(currFacility);
             if(currDistance < maxDistanceInmin){
-                *minChoice = currFacility;
+                toReturn = new FacilityType(std::move(currFacility));
                 maxDistanceInmin = currDistance;
             }
         }
         //possibly redundant
-        EconomyScore += minChoice->getEconomyScore();
-        EnvironmentScore += minChoice->getEnvironmentScore();
-        LifeQualityScore += minChoice->getLifeQualityScore();
+        EconomyScore += toReturn->getEconomyScore();
+        EnvironmentScore += toReturn->getEnvironmentScore();
+        LifeQualityScore += toReturn->getLifeQualityScore();
     }
-    return *minChoice;
+    return *toReturn;
 }    
 
 const string BalancedSelection :: toString() const{
@@ -65,7 +67,7 @@ const FacilityType& EconomySelection :: selectFacility(const vector<FacilityType
         for(;currIndex < facilitiesOptions.size() & !ecoFound; currIndex++){
             if(facilitiesOptions.at(currIndex).getCategory() == FacilityCategory :: ECONOMY){
                 ecoFound = true;
-                *toReturn = facilitiesOptions.at(currIndex);
+                toReturn = new FacilityType(std::move(facilitiesOptions.at(currIndex))); 
             }
         }
     }
@@ -92,7 +94,7 @@ const FacilityType& SustainabilitySelection :: selectFacility(const vector<Facil
         for(;currIndex < facilitiesOptions.size() & !lifeFound; currIndex++){
             if(facilitiesOptions.at(currIndex).getCategory() == FacilityCategory :: LIFE_QUALITY){
                 lifeFound = true;
-                *toReturn = facilitiesOptions.at(currIndex);
+                toReturn = new FacilityType(std::move(facilitiesOptions.at(currIndex))); 
             }
         }
     }
