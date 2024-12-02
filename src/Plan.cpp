@@ -117,26 +117,27 @@ void Plan::step()
             Facility* newFacility = new Facility(selectedType, settlement.getName());
             underConstruction.push_back(newFacility);
         }
-
-        //step 3
-        for(int i=underConstruction.size()-1;i>=0;i--)
+    }
+    //step 3
+    for(int i=underConstruction.size()-1;i>=0;i--)
+    {
+        underConstruction[i]->setStatus(underConstruction[i]->step());
+        if (underConstruction[i]->getStatus()==FacilityStatus::OPERATIONAL)
         {
-            underConstruction[i]->setStatus(underConstruction[i]->step());
-            if (underConstruction[i]->getStatus()==FacilityStatus::OPERATIONAL)
-            {
-                facilities.push_back(underConstruction[i]);
-                underConstruction.erase(underConstruction.begin()+i);
-            }
-
+            facilities.push_back(underConstruction[i]);
+            this->economy_score =  this->environment_score +  underConstruction[i]->getEconomyScore();
+            this->environment_score =  this->environment_score + underConstruction[i]->getEnvironmentScore();
+            this->life_quality_score = this->life_quality_score + underConstruction[i]->getLifeQualityScore();
+            underConstruction.erase(underConstruction.begin()+i);
         }
 
-        //step 4
-        if (underConstruction.size()==constructionLimit)
-            {status = PlanStatus::BUSY;}
-        else
-        {status = PlanStatus::AVALIABLE;}
-        
     }
+    //step 4
+    if (underConstruction.size()==constructionLimit)
+        {status = PlanStatus::BUSY;}
+    else
+    {status = PlanStatus::AVALIABLE;}
+        
 };
 
 void Plan::printStatus()
