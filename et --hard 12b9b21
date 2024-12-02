@@ -1,0 +1,30 @@
+[33mce70f49[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: rebase (finish): returning to refs/heads/main
+[33mce70f49[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{1}: rebase (start): checkout refs/remotes/origin/main
+[33m12b9b21[m HEAD@{2}: commit: issues
+[33mdae043b[m HEAD@{3}: commit: started running
+[33mad727ce[m HEAD@{4}: commit: fixed?
+[33m26f53be[m HEAD@{5}: rebase (finish): returning to refs/heads/main
+[33m26f53be[m HEAD@{6}: rebase (continue): aa
+[33m3767112[m HEAD@{7}: rebase (start): checkout refs/remotes/origin/main
+[33m7ef6d33[m HEAD@{8}: commit: aa
+[33m18ef048[m HEAD@{9}: pull --tags origin main: Fast-forward
+[33m23073c1[m HEAD@{10}: commit: work?
+[33mabd8d0f[m HEAD@{11}: commit: change logical problems in selection policy and simulation
+[33m35c18b0[m HEAD@{12}: pull --tags origin main: Fast-forward
+[33m3a9c713[m HEAD@{13}: commit: handledd non-redundant warnings
+[33me761baa[m HEAD@{14}: commit: added little changes
+[33md77cbe8[m HEAD@{15}: rebase (finish): returning to refs/heads/main
+[33md77cbe8[m HEAD@{16}: rebase (pick): added rule of 5
+[33mad5edf6[m HEAD@{17}: rebase (start): checkout refs/remotes/origin/main
+[33mfee739f[m HEAD@{18}: commit: added rule of 5
+[33m73b8b32[m HEAD@{19}: checkout: moving from simulation to main
+[33m033782e[m[33m ([m[1;31morigin/simulation[m[33m, [m[1;32msimulation[m[33m)[m HEAD@{20}: checkout: moving from 033782ed1db3f560e7ae9b72a3b009baf1cb9124 to simulation
+[33m033782e[m[33m ([m[1;31morigin/simulation[m[33m, [m[1;32msimulation[m[33m)[m HEAD@{21}: checkout: moving from main to 033782ed1db3f560e7ae9b72a3b009baf1cb9124
+[33m73b8b32[m HEAD@{22}: merge refs/remotes/origin/main: Merge made by the 'ort' strategy.
+[33m033782e[m[33m ([m[1;31morigin/simulation[m[33m, [m[1;32msimulation[m[33m)[m HEAD@{23}: commit: updated simulation
+[33m76466fd[m HEAD@{24}: commit: added twiks to makefile, plan and simulation
+[33mf106e74[m HEAD@{25}: pull --tags origin main: Fast-forward
+[33m5644f2e[m HEAD@{26}: pull --tags origin main: Fast-forward
+[33m6c583e8[m HEAD@{27}: commit: selection policy
+[33m4c0496e[m HEAD@{28}: commit: testing
+[33m79d0620[m HEAD@{29}: clone: from https://github.com/ariellush/spl1
