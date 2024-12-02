@@ -49,6 +49,7 @@ class Facility: public FacilityType {
         void setStatus(FacilityStatus status);
         const FacilityStatus& getStatus() const;
         const string toString() const;
+        const string getStatusAsString()  const;
 
     private:
         const string settlementName;

@@ -67,3 +67,12 @@ FacilityStatus Facility :: step(){
 }
 
 FacilityType &FacilityType:: operator=(const FacilityType &other){}
+
+const string Facility::getStatusAsString() const
+{
+    if (status==FacilityStatus::OPERATIONAL)
+     return "OPERATIONAL";
+    if (status==FacilityStatus::UNDER_CONSTRUCTIONS)
+        return "UNDER CONSTRUCTION";
+    return "";//should never happen
+}

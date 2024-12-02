@@ -35,4 +35,4 @@ clean:
 # Customize this file to define how to build your project.
 
 run:
-	./bin/main /wrokspaces/spl1/spl1/confiig_file
+	./bin/main /wrokspaces/spl1/spl1/config_file

@@ -196,7 +196,7 @@ void PrintPlanStatus::act(Simulation &simulation)
      std::cout<<getErrorMsg()<<std::endl;
     }
     else{
-    std::cout<<"Plan id: "<<planId << "settlementName"<<std::endl;//get name
+    std::cout<<"Plan id: "<<planId << "\nsettlementName: "<<plan.getSettlementName()<<std::endl;
     std::cout<<"planStatus: "<<plan.getPlanStatusStr()<<std::endl;
     std::cout<<"LifeQualityScore: "<<plan.getlifeQualityScore()<<std::endl;
     std::cout<<"EconomyScore: "<<plan.getEconomyScore()<<std::endl;
@@ -204,12 +204,16 @@ void PrintPlanStatus::act(Simulation &simulation)
     const vector<Facility*> facilities = plan.getFacilities();
         for (int i=0;i<facilities.size();i++)
         {
-            std::cout<<"facilityName: "<<facilities.at(i)->getName()<<" facilityStatus: "<</*facilities.at(i)->getStatus()<<*/std::endl;
+            const string statusStr = string(facilities.at(i)->getStatusAsString());
+            std::cout<<"facilityName: "<<facilities.at(i)->getName()<<std::endl;
+            std::cout<<"facilityStatus: "<<statusStr<<std::endl;
         }    
     const vector<Facility*> underConst = plan.getUnderConstruction();
         for (int i=0;i<underConst.size();i++)
         {
-            std::cout<<"facilityName: "<<underConst.at(i)->getName()<<" \nfacilityStatus: "<</*facilities.at(i)->getStatus()<<*/std::endl;
+            const string statusStr = string(underConst.at(i)->getStatusAsString());
+            std::cout<<"facilityName: "<<underConst.at(i)->getName()<<std::endl;
+            std::cout<<"facilityStatus: "<<statusStr<<std::endl;
         }
 
     complete();

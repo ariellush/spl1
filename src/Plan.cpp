@@ -180,3 +180,8 @@ SelectionPolicy* Plan::getSelectionPolicy() const
 int Plan:: getID(){
     return plan_id;
 }
+
+const string& Plan::getSettlementName() const
+{
+    return settlement.getName();
+}
