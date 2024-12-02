@@ -110,7 +110,7 @@ void Simulation::start(){
                 if(argNum != 3){
                     std::cout<<illeaglComm<<std::endl;
                 } else {
-                    string name = args.at(1);
+                    string &name = args.at(1);
                     action = new AddPlan(name, args.at(2));
                     action ->act(*this);
                     actionsLog.push_back(action);
@@ -254,7 +254,9 @@ void Simulation::start(){
 }
 
 void Simulation :: addPlan(const Settlement &settlement, SelectionPolicy *selectionPolicy){
-    plans.push_back(Plan(planCounter, settlement, selectionPolicy, facilitiesOptions));
+    int i =5;
+    Plan plan = Plan(planCounter, settlement, selectionPolicy, facilitiesOptions);
+    plans.push_back(plan);
     planCounter++;
 }
 
@@ -282,13 +284,15 @@ bool Simulation :: isSettlementExists(const string &settlementName){
 }
 
 Settlement& Simulation :: getSettlement(const string &settlementName){
-    Settlement *toReturn = nullptr;
-    for(int i = 0; i < settlements.size(); i++){
+    int index = -1;
+    bool found = false;
+    for(int i = 0; i < settlements.size() & !found; i++){
         if(settlements.at(i)->getName() == settlementName){
-            toReturn = settlements.at(i);
+            found = true;
+            index = i;
         }
     }
-    return *toReturn;
+    return *settlements.at(index);
 }
 
 Plan & Simulation :: getPlan(const int planID){
@@ -323,9 +327,13 @@ vector<BaseAction*>& Simulation:: getActionsLog(){
 
 bool Simulation::isPlanExist(int planId) const
 {
-        if(planId < plans.size() && planId >= 0)
-            return true;
-        return false;
+    bool found = false;
+    for(int i = 0; i < plans.size() & !found; i++){
+        Plan plan = plans.at(i);
+        if(plan.getID() == planId)
+            found = true;
+    }
+    return found;
 }
 
 bool Simulation::isFacilityExist(string name) const
@@ -349,7 +357,7 @@ Simulation:: Simulation(Simulation& other):isRunning(other.isRunning),planCounte
     }
     settlements = vector<Settlement *>();
     for(Settlement *set: other.settlements){
-        Settlement *newVal = set;
+        Settlement *newVal = new Settlement(*set);
         settlements.push_back(newVal);
     }
     facilitiesOptions = vector<FacilityType>();
@@ -403,7 +411,7 @@ Simulation :: Simulation(Simulation&& other):isRunning(other.isRunning),planCoun
     other.actionsLog = vector<BaseAction *>();
 }
 Simulation& Simulation :: operator=(Simulation&& other){
-    //this->~Simulation();
+    //Fthis->~Simulation();
     isRunning = other.isRunning;
     planCounter = other.planCounter;
     actionsLog = other.actionsLog;

@@ -24,6 +24,9 @@ FacilityCategory FacilityType :: getCategory() const {
     return category;
 }
 
+FacilityType:: FacilityType(const FacilityType &type):name(type.name),category(type.category),price(type.price),lifeQuality_score(type.lifeQuality_score),
+economy_score(type.economy_score),environment_score(type.environment_score){};
+
 Facility :: Facility(const string &name, const string &settlementName, const FacilityCategory category, const int price, const int lifeQuality_score, const int economy_score, const int environment_score)
     : FacilityType :: FacilityType(name, category, price, lifeQuality_score, economy_score, environment_score), settlementName(settlementName), timeLeft(price){
         status = FacilityStatus :: UNDER_CONSTRUCTIONS;

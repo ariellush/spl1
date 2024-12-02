@@ -63,7 +63,7 @@ void AddPlan::act(Simulation& simulation)
     if (!simulation.isSettlementExists(settlementName))
         error("Cannot create this plan");
     else{
-        Settlement settlement = simulation.getSettlement(settlementName);
+        Settlement *settlement = &simulation.getSettlement(settlementName);
         bool policyExist = true;
         SelectionPolicy* policy;
         if (selectionPolicy=="nve")
@@ -81,7 +81,7 @@ void AddPlan::act(Simulation& simulation)
         }
         if (policyExist)
             {
-            simulation.addPlan(settlement,policy);
+            simulation.addPlan(*settlement,policy);
             complete();
             }   
         }
@@ -114,6 +114,7 @@ void AddSettlement::act (Simulation& simulation)
     else{
         Settlement* settlement = new Settlement(settlementName,settlementType);
         simulation.addSettlement(settlement);
+        settlement = nullptr;
         complete();
     }
 }
@@ -312,6 +313,7 @@ void Close::act(Simulation& simulation)
     {
         PrintPlanStatus* pps = new PrintPlanStatus(i);
         pps->act(simulation);
+        i++;
     }
     complete();
 }

@@ -38,6 +38,8 @@ const FacilityType& BalancedSelection :: selectFacility(const vector<FacilityTyp
         for(FacilityType currFacility : facilitiesOptions){
             int currDistance = getMaxDistance(currFacility);
             if(currDistance < maxDistanceInmin){
+                if(toReturn != nullptr)
+                    delete(toReturn);
                 toReturn = new FacilityType(std::move(currFacility));
                 maxDistanceInmin = currDistance;
             }
