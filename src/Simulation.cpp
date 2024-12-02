@@ -328,6 +328,16 @@ bool Simulation::isPlanExist(int planId) const
         return false;
 }
 
+bool Simulation::isFacilityExist(string name) const
+{
+    for (int i=0;i<facilitiesOptions.size();i++)
+    {
+        if (facilitiesOptions.at(i).getName()==name)
+            return true;
+    }
+    return false;
+}
+
 Simulation:: Simulation(Simulation& other):isRunning(other.isRunning),planCounter(other.planCounter){
     actionsLog = vector<BaseAction*>();
     for(BaseAction *action: other.actionsLog){

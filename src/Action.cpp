@@ -153,12 +153,12 @@ AddFacility::AddFacility(const string &newFacilityName, const FacilityCategory n
 {}
 void AddFacility::act(Simulation& simulation)
 {
-    /*if (simulation.isFacilityExist(facilityName)) //Add that
+    if (simulation.isFacilityExist(facilityName)) //Add that
         error("Facility already exists");
-    else{*/
+    else{
     FacilityType newFacility = FacilityType(facilityName,facilityCategory,price,lifeQualityScore,economyScore,environmentScore);
     simulation.addFacility(newFacility);
-    /*}*/
+    }
 }
 AddFacility* AddFacility::clone() const
 {

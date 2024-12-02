@@ -33,6 +33,7 @@ class Simulation {
         Simulation& operator=(Simulation&& other);
         vector<BaseAction*>& getActionsLog();
         bool isPlanExist(int planId) const;
+        bool isFacilityExist(string facilityName) const;
 
     private:
         bool isRunning;
