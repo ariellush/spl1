@@ -65,7 +65,7 @@ const FacilityType& EconomySelection :: selectFacility(const vector<FacilityType
             }
         }
     }
-    lastSelectedIndex = currIndex;
+    lastSelectedIndex = currIndex-1;
     return facilitiesOptions.at(currIndex);
 }
 
@@ -91,7 +91,7 @@ const FacilityType& SustainabilitySelection :: selectFacility(const vector<Facil
             }
         }
     }
-    lastSelectedIndex = currIndex;
+    lastSelectedIndex = currIndex-1;
     return facilitiesOptions.at(currIndex);
 }
 

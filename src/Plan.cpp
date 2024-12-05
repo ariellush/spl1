@@ -66,6 +66,7 @@ Plan::~Plan()
 //since the settlement cannot be changed
 Plan& Plan::operator=(const Plan &other)
 {
+    delete selectionPolicy;
     if (&other != this)
     {
         selectionPolicy=other.selectionPolicy;
@@ -113,7 +114,8 @@ void Plan::step()
         //step 2
         while (constructionLimit>underConstruction.size())
         {
-            FacilityType selectedType = selectionPolicy->selectFacility(facilityOptions);
+            selectionPolicy->selectFacility(facilityOptions);
+            FacilityType selectedType(selectionPolicy->selectFacility(facilityOptions));
             Facility* newFacility = new Facility(selectedType, settlement.getName());
             underConstruction.push_back(newFacility);
         }
@@ -178,7 +180,7 @@ SelectionPolicy* Plan::getSelectionPolicy() const
     return selectionPolicy;
 }
 
-int Plan:: getID(){
+int Plan:: getID() const{
     return plan_id;
 }
 
