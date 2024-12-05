@@ -34,7 +34,7 @@ status(PlanStatus::AVALIABLE)
 Plan::Plan(Plan& other)
 :plan_id(other.plan_id)
 ,settlement(other.settlement)
-,selectionPolicy(other.selectionPolicy)
+,selectionPolicy(other.selectionPolicy->clone())
 ,facilityOptions(other.facilityOptions),
 life_quality_score(other.life_quality_score)
 ,economy_score(other.economy_score)
@@ -48,7 +48,7 @@ life_quality_score(other.life_quality_score)
 Plan::Plan(const Plan& other)
 :plan_id(other.plan_id)
 ,settlement(other.settlement)
-,selectionPolicy(other.selectionPolicy)
+,selectionPolicy(other.selectionPolicy->clone())
 ,facilityOptions(other.facilityOptions),
 life_quality_score(other.life_quality_score)
 ,economy_score(other.economy_score)
@@ -59,8 +59,9 @@ life_quality_score(other.life_quality_score)
 ,status(other.status)
 {};
 
-Plan::~Plan()
-{}
+Plan::~Plan(){
+    delete selectionPolicy;
+}
 
 //essencialy only copies the selection policy 
 //since the settlement cannot be changed
@@ -69,7 +70,7 @@ Plan& Plan::operator=(const Plan &other)
     delete selectionPolicy;
     if (&other != this)
     {
-        selectionPolicy=other.selectionPolicy;
+        selectionPolicy= other.selectionPolicy->clone();
     }
 }
 
