@@ -311,8 +311,12 @@ void Close::act(Simulation& simulation)
     int i=0;
     while(simulation.isPlanExist(i))
     {
-        PrintPlanStatus* pps = new PrintPlanStatus(i);
-        pps->act(simulation);
+        std::cout<<"Plan id: "<<i << ",settlementName: "<<simulation.getPlan(i).getSettlementName()<<std::endl;
+        
+        std::cout<<"LifeQualityScore: "<<simulation.getPlan(i).getlifeQualityScore()<<std::endl;
+        std::cout<<"EconomyScore: "<<simulation.getPlan(i).getEconomyScore()<<std::endl;
+        std::cout<<"EnvironmentScore: "<<simulation.getPlan(i).getEnvironmentScore()<<std::endl;
+
         i++;
     }
     complete();

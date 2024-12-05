@@ -80,6 +80,7 @@ planCounter(0)
                     policy=new SustainabilitySelection();
                 
                 addPlan(*settlement,policy);
+                delete policy;
             }
         }
     }

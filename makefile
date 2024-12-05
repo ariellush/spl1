@@ -1,3 +1,5 @@
+make: clean compile run
+
 # Please implement your Makefile rules and targets below.
 main: bin/main.o bin/Facility.o bin/SelectionPolicy.o bin/Simulation.o bin/Plan.o bin/Action.o bin/Settlement.o bin/Auxiliary.o
 	@echo 'Building target: main'
@@ -29,6 +31,8 @@ bin/Settlement.o : src/Settlement.cpp include/Settlement.h
 
 bin/Auxiliary.o : src/Auxiliary.cpp include/Auxiliary.h
 	g++ -g -Wall -Weffc++ -std=c++11 -c -Iinclude -o bin/Auxiliary.o src/Auxiliary.cpp	
+
+compile: main
 
 clean:
 	rm -f bin/*	
