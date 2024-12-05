@@ -409,9 +409,9 @@ Simulation& Simulation :: operator=(Simulation&& other){
     for(BaseAction *action: actionsLog){
         delete action;
     }
-    for(Settlement *set: settlements){
+    /*for(Settlement *set: settlements){
         delete set;
-    }
+    }*/
     isRunning = other.isRunning;
     planCounter = other.planCounter;
     actionsLog = other.actionsLog;
