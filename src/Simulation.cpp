@@ -367,7 +367,12 @@ Simulation:: Simulation(Simulation& other):isRunning(other.isRunning),planCounte
 }
 
 Simulation& Simulation :: operator=(const Simulation &other){
-    //this->~Simulation();
+    for(BaseAction *action: actionsLog){
+        delete action;
+    }
+    for(Settlement *set: settlements){
+        delete set;
+    }
     isRunning = other.isRunning;
     planCounter = other.planCounter;
     actionsLog = vector<BaseAction*>();
@@ -411,7 +416,12 @@ Simulation :: Simulation(Simulation&& other):isRunning(other.isRunning),planCoun
     other.actionsLog = vector<BaseAction *>();
 }
 Simulation& Simulation :: operator=(Simulation&& other){
-    //Fthis->~Simulation();
+    for(BaseAction *action: actionsLog){
+        delete action;
+    }
+    for(Settlement *set: settlements){
+        delete set;
+    }
     isRunning = other.isRunning;
     planCounter = other.planCounter;
     actionsLog = other.actionsLog;
