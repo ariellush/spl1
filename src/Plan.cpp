@@ -39,11 +39,18 @@ Plan::Plan(Plan& other)
 life_quality_score(other.life_quality_score)
 ,economy_score(other.economy_score)
 ,environment_score(other.environment_score)
-,facilities(other.facilities)
-,underConstruction(other.underConstruction)
+,facilities(vector<Facility *>())
+,underConstruction(vector<Facility *>())
 ,constructionLimit(other.constructionLimit)
 ,status(other.status)
-{};
+{
+    for(Facility *f: other.facilities){
+        facilities.push_back(new Facility(*f));
+    }
+    for(Facility *f: other.underConstruction){
+        underConstruction.push_back(new Facility(*f));
+    }
+};
 
 Plan::Plan(const Plan& other)
 :plan_id(other.plan_id)
@@ -53,14 +60,27 @@ Plan::Plan(const Plan& other)
 life_quality_score(other.life_quality_score)
 ,economy_score(other.economy_score)
 ,environment_score(other.environment_score)
-,facilities(other.facilities)
-,underConstruction(other.underConstruction)
+,facilities(vector<Facility *>())
+,underConstruction(vector<Facility *>())
 ,constructionLimit(other.constructionLimit)
 ,status(other.status)
-{};
+{
+    for(Facility *f: other.facilities){
+        facilities.push_back(new Facility(*f));
+    }
+    for(Facility *f: other.underConstruction){
+        underConstruction.push_back(new Facility(*f));
+    }
+};
 
 Plan::~Plan(){
     delete selectionPolicy;
+    for(Facility *f: facilities){
+        delete f;
+    }
+    for(Facility *u: underConstruction){
+        delete u;
+    }
 }
 
 //essencialy only copies the selection policy 
