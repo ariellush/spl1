@@ -1,9 +1,9 @@
 # Please implement your Makefile rules and targets below.
-main: bin/main.o bin/Facility.o bin/SelectionPolicy.o bin/Simulation.o bin/Plan.o bin/Action.o bin/Settlement.o bin/Auxiliary.o
-	@echo 'Building target: main'
+simulation: bin/main.o bin/Facility.o bin/SelectionPolicy.o bin/Simulation.o bin/Plan.o bin/Action.o bin/Settlement.o bin/Auxiliary.o
+	@echo 'Building target: simulation'
 	@echo 'Invoking: C++ Linker'
-	g++ -o bin/main bin/main.o bin/Facility.o bin/SelectionPolicy.o bin/Simulation.o bin/Plan.o bin/Action.o bin/Settlement.o bin/Auxiliary.o
-	@echo 'Finished building target: main'
+	g++ -o bin/simulation bin/main.o bin/Facility.o bin/SelectionPolicy.o bin/Simulation.o bin/Plan.o bin/Action.o bin/Settlement.o bin/Auxiliary.o
+	@echo 'Finished building target: simulation'
 	@echo ' '	
 
 bin/main.o : src/main.cpp include/Simulation.h
