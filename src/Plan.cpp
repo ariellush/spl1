@@ -33,7 +33,7 @@ status(PlanStatus::AVALIABLE)
 //allowes to change the copy of the plan without discarding to original
 Plan::Plan(Plan& other)
 :plan_id(other.plan_id)
-,settlement(other.settlement)
+,settlement(Settlement(other.settlement))
 ,selectionPolicy(other.selectionPolicy->clone())
 ,facilityOptions(other.facilityOptions),
 life_quality_score(other.life_quality_score)
@@ -115,6 +115,7 @@ life_quality_score(other.life_quality_score)
 //Move assignment operator
 Plan& Plan::operator=(Plan&& other)
 {
+    delete selectionPolicy;
     selectionPolicy=other.selectionPolicy;
     other.selectionPolicy=nullptr;
 }

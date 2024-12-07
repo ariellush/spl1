@@ -33,8 +33,7 @@ planCounter(0)
                     type = SettlementType::CITY;
                 else if (typeNum=="2")
                     type = SettlementType::METROPOLIS;
-                Settlement* settlement = new Settlement(name,type);
-                addSettlement(settlement);
+                addSettlement(new Settlement(name,type));
             }
             else if (command=="facility")
             {
@@ -393,9 +392,9 @@ Simulation ::~Simulation(){
 }
 Simulation :: Simulation(Simulation&& other):isRunning(other.isRunning),planCounter(other.planCounter),plans(vector<Plan>()),
 actionsLog(vector<BaseAction *>()),settlements(vector<Settlement *>()){
-    for(int i = 0; i < other.plans.size(); i++){
-        plans.push_back(other.plans.at(i));
-    }  
+    plans = other.plans;
+    actionsLog = other.actionsLog;
+    settlements = other.settlements; 
     facilitiesOptions = other.facilitiesOptions;
 }
 Simulation& Simulation :: operator=(Simulation&& other){
@@ -408,10 +407,7 @@ Simulation& Simulation :: operator=(Simulation&& other){
     isRunning = other.isRunning;
     planCounter = other.planCounter;
     actionsLog = other.actionsLog;
-    plans = vector<Plan>();
-    for(int i = 0; i < other.plans.size(); i++){
-        plans.push_back(other.plans.at(i));
-    }    
+    plans=other.plans;
     settlements = other.settlements;
     facilitiesOptions = other.facilitiesOptions;   
     return *this;
