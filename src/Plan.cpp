@@ -54,7 +54,7 @@ life_quality_score(other.life_quality_score)
 
 Plan::Plan(const Plan& other)
 :plan_id(other.plan_id)
-,settlement(other.settlement)
+,settlement(Settlement(other.settlement))
 ,selectionPolicy(other.selectionPolicy->clone())
 ,facilityOptions(other.facilityOptions),
 life_quality_score(other.life_quality_score)

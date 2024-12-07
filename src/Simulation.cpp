@@ -254,7 +254,6 @@ void Simulation::start(){
 }
 
 void Simulation :: addPlan(const Settlement &settlement, SelectionPolicy *selectionPolicy){
-    int i =5;
     Plan plan = Plan(planCounter, settlement, selectionPolicy, facilitiesOptions);
     plans.push_back(plan);
     planCounter++;
@@ -352,11 +351,10 @@ actionsLog(vector<BaseAction *>()),plans(vector<Plan>()),settlements(vector<Sett
         actionsLog.push_back(action->clone());
     }
     for(Plan plan: other.plans){
-        plans.push_back(plan);
+        plans.push_back(Plan(plan));
     }
     for(Settlement *set: other.settlements){
-        Settlement *newVal = new Settlement(*set);
-        settlements.push_back(newVal);
+        settlements.push_back(new Settlement(Settlement(*set)));
     }
     facilitiesOptions = other.facilitiesOptions;
 }
@@ -380,9 +378,7 @@ Simulation& Simulation :: operator=(const Simulation &other){
     }
     settlements = vector<Settlement *>();
     for(Settlement *set: other.settlements){
-        Settlement *newVal = nullptr;
-        *newVal = *set;
-        settlements.push_back(newVal);
+        settlements.push_back(new Settlement(Settlement(*set)));
     }
     facilitiesOptions = other.facilitiesOptions;
     return *this;
@@ -401,17 +397,14 @@ actionsLog(vector<BaseAction *>()),settlements(vector<Settlement *>()){
         plans.push_back(other.plans.at(i));
     }  
     facilitiesOptions = other.facilitiesOptions;
-    other.settlements = vector<Settlement *>();
-    other.plans = vector<Plan>();
-    other.actionsLog = vector<BaseAction *>();
 }
 Simulation& Simulation :: operator=(Simulation&& other){
     for(BaseAction *action: actionsLog){
         delete action;
     }
-    /*for(Settlement *set: settlements){
+    for(Settlement *set: settlements){
         delete set;
-    }*/
+    }
     isRunning = other.isRunning;
     planCounter = other.planCounter;
     actionsLog = other.actionsLog;
@@ -420,9 +413,6 @@ Simulation& Simulation :: operator=(Simulation&& other){
         plans.push_back(other.plans.at(i));
     }    
     settlements = other.settlements;
-    facilitiesOptions = other.facilitiesOptions;
-    other.settlements = vector<Settlement *>();
-    other.plans = vector<Plan>();
-    other.actionsLog = vector<BaseAction *>();    
+    facilitiesOptions = other.facilitiesOptions;   
     return *this;
 }
