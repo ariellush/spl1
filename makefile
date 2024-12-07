@@ -36,4 +36,4 @@ clean:
 # Customize this file to define how to build your project.
 
 run:
-	./bin/main /workspaces/spl1/spl1/config_file.txt
+	./bin/main ./config_file.txt
