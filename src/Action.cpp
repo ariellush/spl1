@@ -48,7 +48,7 @@ const string SimulateStep::toString() const
     if (getStatus() == ActionStatus::COMPLETED)
         statusStr="COMPLETED";
     else if (getStatus()==ActionStatus::ERROR)
-        statusStr=="ERROR";
+        statusStr="ERROR";
     return "step "+std::to_string(numOfSteps)+" "+statusStr;
 }
 
@@ -93,7 +93,7 @@ const string AddPlan::toString() const
     if (getStatus() == ActionStatus::COMPLETED)
         statusStr="COMPLETED";
     else if (getStatus()==ActionStatus::ERROR)
-        statusStr=="ERROR";
+        statusStr="ERROR";
     return "plan "+settlementName+" "+selectionPolicy+" "+statusStr;
 }
 AddPlan* AddPlan::clone() const 
@@ -137,7 +137,7 @@ const string AddSettlement::toString() const
     if (getStatus() == ActionStatus::COMPLETED)
         statusStr="COMPLETED";
     else if (getStatus()==ActionStatus::ERROR)
-        statusStr=="ERROR";
+        statusStr="ERROR";
 
     return "settlement "+settlementName+" "+typeStr+" "+statusStr;
 }
@@ -179,7 +179,7 @@ const string AddFacility::toString() const
     if (getStatus() == ActionStatus::COMPLETED)
         statusStr="COMPLETED";
     else if (getStatus()==ActionStatus::ERROR)
-        statusStr=="ERROR";
+        statusStr="ERROR";
     return "SimulateStep "+facilityName+" "+catStr+" "+std::to_string(price)+" "+std::to_string(lifeQualityScore)+" "+std::to_string(economyScore)+" "+std::to_string(environmentScore) +" "+statusStr;
 }
 
@@ -232,7 +232,7 @@ const string PrintPlanStatus::toString() const
     if (getStatus() == ActionStatus::COMPLETED)
         statusStr="COMPLETED";
     else if (getStatus()==ActionStatus::ERROR)
-        statusStr=="ERROR";
+        statusStr="ERROR";
     return "planStatus "+std::to_string(planId)+" "+statusStr;
 }
 
@@ -299,7 +299,7 @@ const string PrintActionsLog::toString() const
     if (getStatus() == ActionStatus::COMPLETED)
         statusStr="COMPLETED";
     else if (getStatus()==ActionStatus::ERROR)
-        statusStr=="ERROR";
+        statusStr="ERROR";
     return "log "+statusStr;
 }
 
@@ -331,7 +331,7 @@ const string Close::toString() const
     if (getStatus() == ActionStatus::COMPLETED)
         statusStr="COMPLETED";
     else if (getStatus()==ActionStatus::ERROR)
-        statusStr=="ERROR";
+        statusStr="ERROR";
     return "close "+statusStr;
 }
 
@@ -353,7 +353,7 @@ const string BackupSimulation::toString() const
     if (getStatus() == ActionStatus::COMPLETED)
         statusStr="COMPLETED";
     else if (getStatus()==ActionStatus::ERROR)
-        statusStr=="ERROR";
+        statusStr="ERROR";
     return "backup "+statusStr;
 }
 
@@ -379,6 +379,6 @@ const string RestoreSimulation::toString() const
     if (getStatus() == ActionStatus::COMPLETED)
         statusStr="COMPLETED";
     else if (getStatus()==ActionStatus::ERROR)
-        statusStr=="ERROR";
+        statusStr="ERROR";
     return "restore "+statusStr;
 }
