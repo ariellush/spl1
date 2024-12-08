@@ -1,9 +1,9 @@
 # Please implement your Makefile rules and targets below.
 main: bin/main.o bin/Facility.o bin/SelectionPolicy.o bin/Simulation.o bin/Plan.o bin/Action.o bin/Settlement.o bin/Auxiliary.o
-	@echo 'Building target: main'
+	@echo 'Building target: Simulation'
 	@echo 'Invoking: C++ Linker'
-	g++ -o bin/main bin/main.o bin/Facility.o bin/SelectionPolicy.o bin/Simulation.o bin/Plan.o bin/Action.o bin/Settlement.o bin/Auxiliary.o
-	@echo 'Finished building target: main'
+	g++ -o bin/simulation bin/main.o bin/Facility.o bin/SelectionPolicy.o bin/Simulation.o bin/Plan.o bin/Action.o bin/Settlement.o bin/Auxiliary.o
+	@echo 'Finished building target: simulation'
 	@echo ' '	
 
 bin/main.o : src/main.cpp include/Simulation.h
@@ -36,4 +36,4 @@ clean:
 # Customize this file to define how to build your project.
 
 run:
-	./bin/main ./config_file.txt
+	./bin/simulation ./config_file.txt
