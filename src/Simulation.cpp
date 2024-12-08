@@ -59,7 +59,7 @@ planCounter(0)
             {
                 string name = args.at(1);
                 string policyStr = args.at(2);
-                Settlement* settlement;
+                Settlement* settlement=nullptr;
                 for (Settlement* sett:settlements)
                 {
                     if (sett->getName()==name)
@@ -244,7 +244,7 @@ void Simulation::start(){
                     action = new RestoreSimulation();
                     action->act(*this);
                     actionsLog.push_back(action);
-                }                        
+                }                       
             } else {
                 std::cout<<illeaglComm<<std::endl;                
             }
@@ -325,13 +325,7 @@ vector<BaseAction*>& Simulation:: getActionsLog(){
 
 bool Simulation::isPlanExist(int planId) const
 {
-    bool found = false;
-    for(int i = 0; i < plans.size() & !found; i++){
-        Plan plan = plans.at(i);
-        if(plan.getID() == planId)
-            found = true;
-    }
-    return found;
+    return planId < planCounter && planId >= 0;
 }
 
 bool Simulation::isFacilityExist(string name) const
@@ -353,7 +347,7 @@ actionsLog(vector<BaseAction *>()),plans(vector<Plan>()),settlements(vector<Sett
         plans.push_back(Plan(plan));
     }
     for(Settlement *set: other.settlements){
-        settlements.push_back(new Settlement(Settlement(*set)));
+        settlements.push_back(new Settlement(*set));
     }
     facilitiesOptions = other.facilitiesOptions;
 }
@@ -377,7 +371,7 @@ Simulation& Simulation :: operator=(const Simulation &other){
     }
     settlements = vector<Settlement *>();
     for(Settlement *set: other.settlements){
-        settlements.push_back(new Settlement(Settlement(*set)));
+        settlements.push_back(new Settlement(*set));
     }
     facilitiesOptions = other.facilitiesOptions;
     return *this;
